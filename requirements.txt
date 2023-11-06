@@ -1,0 +1,6 @@
+Flask
+sqlite
+sqlalchemy
+Flask-SQLAlchemy
+Python3
+jinja2

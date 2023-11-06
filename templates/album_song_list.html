@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - music-app-flexbox</title>
+  <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"><link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'><link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<main>
+    <aside>
+      <a href="/artist/{{ artist.artist_id }}/home"><i class="fa fa-home"></i></a>
+      <a href="/artist/{{ artist.artist_id }}/albums"><i class="fa fa-folder"></i></a>
+      <a href="#link-to-search"><i class="fa fa-search"></i></a>
+      <a href="#link-to-user"><i class="fa fa-user"></i></a>
+    </aside>
+  
+  <section class="content">
+    <div class="music-head">
+      <img src="http://www.popelera.net/wp-content/uploads/2017/10/c-tangana-idolo-1.jpg">
+      <section class="music-details">
+        <div>
+          <p>{{ artist.name }}</p>
+          <p>{{ artist.country }}</p>
+        </div>
+      </section>
+    </div>
+    
+    <ul class="music-list">
+      <li>
+        <p>S.no</p>
+        <p>Title</p>
+        <p>Duration</p>
+        <p>Album</p>
+        <p>Edit</p>
+        <p>delete</p>
+      </li>
+      {% for song in songs %}
+      <li>
+        <p>{{ song.song_id }}</p>
+        <p>{{ song.title }}</p>
+        <p>{{ song.duration }}</p>
+        <p>{{ song.album.title }}</p>
+        <p>  <a href="/artist/{{ artist.artist_id }}/albums/{{ albums.album_id }}/{{ albums.title }}/{{ song.song_id }}/update"><i>EDIT</i></a>  </p>
+        <p>  <a href="/artist/{{ artist.artist_id }}/albums/{{ albums.album_id }}/{{ albums.title }}/{{ song.song_id }}/delete"><i>DELETE</i></a>  </p>
+      </li>
+      {% endfor %}
+      <a href="/artist/{{ artist.artist_id }}/albums/{{ albums.album_id }}/{{ albums.title }}/addsong  "><i class="fa fa-plus"></i></a>
+    </ul>
+  </section>
+</main> 
+  
+</body>
+</html>
