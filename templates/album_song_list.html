@@ -45,6 +45,7 @@
         <p>{{ song.album.title }}</p>
         <p>  <a href="/artist/{{ artist.artist_id }}/albums/{{ albums.album_id }}/{{ albums.title }}/{{ song.song_id }}/update"><i>EDIT</i></a>  </p>
         <p>  <a href="/artist/{{ artist.artist_id }}/albums/{{ albums.album_id }}/{{ albums.title }}/{{ song.song_id }}/delete"><i>DELETE</i></a>  </p>
+        <p><a href="/artist/{{ song.song_id }}/play"><i class="fa fa-play"></i></a> </p>
       </li>
       {% endfor %}
       <a href="/artist/{{ artist.artist_id }}/albums/{{ albums.album_id }}/{{ albums.title }}/addsong  "><i class="fa fa-plus"></i></a>

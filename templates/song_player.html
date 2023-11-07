@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - music-app-flexbox</title>
+  <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"><link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'><link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<main>
+
+  
+  <section class="content1">
+      <div class="song-details">
+          <h1 class="song-title">Song Player</h1>
+          <h1 class="now-playing">{{ song.title }}</h1>
+          <h1 class="now-playing">Album: {{ song.album.title }}</h1>
+          <p><img src="{{ cover_url }}" alt="{{ song.title }} Cover"></p>
+          <audio controls>
+              <source src="{{ audio_url }}" type="audio/mpeg">
+              Your browser does not support the audio element.
+          </audio>
+      </div>
+      <div class="lyrics">
+          <h1>Lyrics</h1>
+          <p>
+              {{ song.lyrics }}
+          </p>
+      </div>
+  </section>
+</main>
+</body>
+</html>

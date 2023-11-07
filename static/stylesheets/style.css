@@ -34,7 +34,10 @@ body {
 }
 
 img{
-  box-shadow: var(--shadow-dark);
+    box-shadow: var(--shadow-dark);
+    max-width: 50%;
+    height: auto;
+    margin-top: 20px;
 }
 
 main{
@@ -63,6 +66,74 @@ aside i.fa{
   margin: 30%;
   box-shadow: var(--shadow-light);
 }
+
+
+
+
+
+
+
+
+
+
+
+audio {
+    width: 100%;
+    margin-top: 20px;
+}
+.content1 {
+    
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(130, 20, 100, 0.9),
+        rgba(22,27,49, 0.9)
+      ),
+      url('https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-0/s480x480/22089365_1390820531034726_4541129191479079887_n.jpg?oh=0586556240f07b0f5cebba14314683b2&oe=5AAF8A6A');
+    background-size: cover;
+    text-align: center;
+    padding: 20px;
+    background-position: top;
+    color: #fff;
+}
+
+/* Style the .song-details container */
+.song-details {
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Style the song title */
+.song-title {
+    font-size: 24px;
+    color: black;
+    margin: 0;
+}
+
+/* Style the "Now playing" text */
+.now-playing {
+    font-size: 20px;
+    color: black;
+}
+.lyrics p {
+    padding: 10px;
+    font-size: 30px;
+    color: black;
+}
+.lyrics h1 {
+    padding: 20px;
+    font-size: 24px; /* Change to your desired font size */
+    color: black;
+}
+
+
+
+
+
+
+
+
+
+
 
 .content{
   background-image: linear-gradient(to right bottom, var(--color-grey-light), var(--color-grey-dark));
@@ -170,16 +241,6 @@ aside i.fa{
   color: var(--color-text-2);
 }
 
-footer{
-  font-size: 2.3rem;
-  background-image: linear-gradient(to right bottom, var(--color-grey-light), var(--color-grey-dark));
-  color: var(--color-grey-lighter);
-  padding: 2.8rem;
-  flex: 0 0 10%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 .playing{
   display: flex;
@@ -240,3 +301,15 @@ footer{
 .icon-link {
     margin-right: 10px; /* Adjust the margin as needed for the desired spacing */
 }
+
+
+
+
+
+
+
+
+
+
+
+

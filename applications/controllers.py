@@ -1,5 +1,7 @@
 import os
-from flask import Flask, redirect
+import io
+from io import BytesIO
+from flask import Flask, redirect , send_file, Response
 from flask import render_template
 from flask import request,url_for,flash
 from flask import current_app as app
@@ -9,6 +11,7 @@ from sqlalchemy import *
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.utils import secure_filename
+from PIL import Image
 
 @app.route('/', methods=['GET', 'POST'])
 def select():
@@ -174,7 +177,7 @@ def delete_album(artist_id,album_id,title):
 		db.session.commit()
 		return redirect(url_for('artist_albums',artist_id=artist_id))
 	else:
-		return render_template('delete_confirmation.html', album=album)
+		return render_template('delete_confirmation_album.html', album=album)
 
 
 ##---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -213,7 +216,7 @@ def delete_song(artist_id,album_id,title,song_id):
 		db.session.commit()
 		return redirect(url_for('artist_albums_songs',artist_id=artist_id,album_id=album_id,title=title))
 	else:
-		return render_template('delete_confirmation.html', song=song)
+		return render_template('delete_confirmation_song.html', song=song)
 
 @app.route('/artist/<artist_id>/albums/<album_id>/<title>/addsong', methods=['GET', 'POST'])
 def add_song(artist_id,album_id,title):
@@ -248,5 +251,42 @@ def allowed_image_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'jpg', 'jpeg', 'png', 'gif'}
 
 
-	
+
+##PLAY SONG------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+@app.route('/artist/<int:song_id>/serve_image')
+def get_image(song_id):
+    song = Songs.query.get(song_id)
+    if song and song.cover:
+        image = Image.open(BytesIO(song.cover))
+        response = BytesIO()
+        image.save(response, format="JPEG")
+        response.seek(0)
+        return send_file(response, mimetype='image/jpeg')
+
+    return 'Image not found', 404
+
+@app.route('/artist/<int:song_id>/serve_audio')
+def serve_audio(song_id):
+    song = Songs.query.get(song_id)
+
+    if song and song.song:
+        binary_audio_data = BytesIO(song.song)  # Assuming 'song.song' is the binary audio data
+
+        # Serve the binary audio data with the correct MIME type
+        return send_file(binary_audio_data, mimetype='audio/mpeg', as_attachment=False)
+
+    return "Song not found", 404
+
+# This route renders the HTML template for playing audio.
+@app.route('/artist/<int:song_id>/play')
+def play_audio(song_id):
+    song = Songs.query.get(song_id)
+    
+    if song:
+        audio_url = url_for('serve_audio', song_id=song_id)
+        cover_url = url_for('get_image', song_id=song_id)
+        return render_template('song_player.html', audio_url=audio_url, song=song, cover_url=cover_url)
+
+    return "Song not found", 404
 
